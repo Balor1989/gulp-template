@@ -1,4 +1,5 @@
 const { src, dest, watch, parallel, series } = require("gulp");
+const browserSync = require("browser-sync").create();
 
 //Plugins
 const size = require("gulp-size");
@@ -12,7 +13,8 @@ const html = () => {
     .pipe(size({ title: "before minimize" }))
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(size({ title: "after minimize" }))
-    .pipe(dest("./ public"));
+    .pipe(dest("./public"))
+    .pipe(browserSync.stream());
 };
 
 //Listener
@@ -20,9 +22,18 @@ const listener = () => {
   watch("./src/**/*.html", html);
 };
 
+//Server
+const server = () => {
+  browserSync.init({
+    server: {
+      baseDir: "./public",
+    },
+  });
+};
+
 //Tasks
 exports.html = html;
 exports.watch = listener;
 
 //Bundler
-exports.dev = series(html, listener);
+exports.dev = series(html, parallel(listener, server));
