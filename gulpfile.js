@@ -5,10 +5,19 @@ const browserSync = require("browser-sync").create();
 const size = require("gulp-size");
 const htmlmin = require("gulp-htmlmin");
 const include = require("gulp-file-include");
+const plumber = require("gulp-plumber");
+const notify = require("gulp-notify");
 
 //HTML processing
 const html = () => {
   return src("./src/html/*.html")
+    .pipe(
+      plumber({
+        errorHandler: notify.onError((error) => ({
+          message: error.message,
+        })),
+      })
+    )
     .pipe(include())
     .pipe(size({ title: "before minimize" }))
     .pipe(htmlmin({ collapseWhitespace: true }))
