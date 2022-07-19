@@ -1,5 +1,6 @@
 const { src, dest, watch, parallel, series } = require("gulp");
 const browserSync = require("browser-sync").create();
+const del = require("del");
 
 //Plugins
 const size = require("gulp-size");
@@ -26,6 +27,11 @@ const html = () => {
     .pipe(browserSync.stream());
 };
 
+// Clear public dir
+const clear = () => {
+  return del("./public");
+};
+
 //Listener
 const listener = () => {
   watch("./src/**/*.html", html);
@@ -43,6 +49,7 @@ const server = () => {
 //Tasks
 exports.html = html;
 exports.watch = listener;
+exports.clear = clear;
 
 //Bundler
-exports.dev = series(html, parallel(listener, server));
+exports.dev = series(clear, html, parallel(listener, server));
