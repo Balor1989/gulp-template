@@ -1,0 +1,12 @@
+/* Header style */
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+}
+
+@media screen and (max-width: 654px) {
+  body {
+    background-color: rgb(133, 129, 129);
+  }
+}

@@ -22,6 +22,8 @@ const clear = require("./src/task/clear.js");
 const html = require("./src/task/html.js");
 const css = require("./src/task/css.js");
 exports.watch = watcher;
+exports.css = css;
+exports.clear = clear;
 
 //Bundler
 exports.dev = series(clear, parallel(html, css), parallel(watcher, server));
