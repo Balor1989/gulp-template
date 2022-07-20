@@ -1,16 +1,17 @@
 const { watch, parallel, series } = require("gulp");
 const browserSync = require("browser-sync").create();
+const path = require("./config/path.js");
 
 //Listener
 const watcher = () => {
-  watch("./src/**/*.html", html).on("all", browserSync.reload);
+  watch(path.html.watch, html).on("all", browserSync.reload);
 };
 
 //Server
 const server = () => {
   browserSync.init({
     server: {
-      baseDir: "./public",
+      baseDir: path.root,
     },
   });
 };
