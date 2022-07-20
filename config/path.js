@@ -8,4 +8,9 @@ module.exports = {
     watch: `${pathSrc}/**/*.html`,
     dest: pathDest,
   },
+  css: {
+    src: `${pathSrc}/css/*.css`,
+    watch: `${pathSrc}/**/*.css`,
+    dest: `${pathDest}/css`,
+  },
 };
