@@ -4,6 +4,7 @@ const path = require("../../config/path.js");
 //Plugins
 const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
+const concatCss = require("gulp-concat-css");
 
 //CSS processing
 const css = () => {
@@ -15,6 +16,7 @@ const css = () => {
         })),
       })
     )
+    .pipe(concatCss("bundle.css"))
     .pipe(dest(path.css.dest));
 };
 
