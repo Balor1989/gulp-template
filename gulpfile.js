@@ -21,8 +21,9 @@ const server = () => {
 const clear = require("./src/task/clear.js");
 const html = require("./src/task/html.js");
 const css = require("./src/task/css.js");
+const scss = require("./src/task/scss.js");
 exports.watch = watcher;
-exports.css = css;
+exports.scss = scss;
 exports.clear = clear;
 
 //Bundler

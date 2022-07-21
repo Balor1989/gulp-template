@@ -1,0 +1,15 @@
+$base-font-size: 22px;
+
+body {
+  font-size: $base-font-size;
+  color: blue;
+  @media screen and (max-width: 654px) {
+    color: rgb(63, 58, 58);
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+@import "./chunks/header.scss";
