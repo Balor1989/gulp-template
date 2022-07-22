@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "gulp dev"
+    "dev": "gulp",
+    "build": "gulp --production"
   },
   "browserslist": {
     "production": [
@@ -48,6 +48,7 @@
     "gulp-file-include": "^2.3.0",
     "gulp-group-css-media-queries": "^1.2.2",
     "gulp-htmlmin": "^5.0.1",
+    "gulp-if": "^3.0.0",
     "gulp-imagemin": "^7.1.0",
     "gulp-newer": "^1.4.0",
     "gulp-notify": "^4.0.0",
@@ -55,6 +56,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
     "gulp-size": "^4.0.1",
+    "if": "^2.0.0",
     "sass": "^1.53.0",
     "webpack": "^5.73.0",
     "webpack-stream": "^7.0.0"

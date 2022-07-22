@@ -6,10 +6,11 @@ const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
 const babel = require("gulp-babel");
 const webpack = require("webpack-stream");
+const { isProd, isDev } = require("../../config/app.js");
 
 //JavaScript processing
 const js = () => {
-  return src(path.js.src, { sourcemaps: true })
+  return src(path.js.src, { sourcemaps: isDev })
     .pipe(
       plumber({
         errorHandler: notify.onError((error) => ({
@@ -19,8 +20,8 @@ const js = () => {
       })
     )
     .pipe(babel())
-    .pipe(webpack({ mode: "development" }))
-    .pipe(dest(path.js.dest, { sourcemaps: true }));
+    .pipe(webpack({ mode: isProd ? "production" : "development" }))
+    .pipe(dest(path.js.dest, { sourcemaps: isDev }));
 };
 
 module.exports = js;

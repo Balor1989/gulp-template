@@ -9,6 +9,8 @@ const autoprefixer = require("gulp-autoprefixer");
 const csso = require("gulp-csso");
 const rename = require("gulp-rename");
 const gcmq = require("gulp-group-css-media-queries");
+const gulpif = require("gulp-if");
+const { isDev, isProd } = require("../../config/app.js");
 
 //CSS processing
 const css = () => {
@@ -24,11 +26,12 @@ const css = () => {
     .pipe(cssimport())
     .pipe(autoprefixer())
     .pipe(gcmq())
-    .pipe(dest(path.css.dest, { sourcemaps: true }))
+    .pipe(gulpif(isProd, csso()))
+    .pipe(dest(path.css.dest, { sourcemaps: isDev }))
     .pipe(rename({ suffix: ".min" }))
     .pipe(gcmq())
     .pipe(csso())
-    .pipe(dest(path.css.dest, { sourcemaps: true }));
+    .pipe(dest(path.css.dest, { sourcemaps: isDev }));
 };
 
 module.exports = css;

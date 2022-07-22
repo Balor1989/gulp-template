@@ -7,6 +7,7 @@ const htmlmin = require("gulp-htmlmin");
 const include = require("gulp-file-include");
 const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
+const { isProd } = require("../../config/app.js");
 
 //HTML processing
 const html = () => {
@@ -21,7 +22,7 @@ const html = () => {
     )
     .pipe(include())
     .pipe(size({ title: "before minimize" }))
-    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(htmlmin({ collapseWhitespace: isProd }))
     .pipe(size({ title: "after minimize" }))
     .pipe(dest(path.html.dest));
 };

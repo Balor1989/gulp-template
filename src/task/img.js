@@ -6,6 +6,8 @@ const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
 const imagemin = require("gulp-imagemin");
 const newer = require("gulp-newer");
+const gulpif = require("gulp-if");
+const { isProd } = require("../../config/app.js");
 
 //Image processing
 const img = () => {
@@ -19,7 +21,7 @@ const img = () => {
       })
     )
     .pipe(newer(path.img.dest))
-    .pipe(imagemin({ verbose: true }))
+    .pipe(gulpif(isProd, imagemin({ verbose: true })))
     .pipe(dest(path.img.dest));
 };
 

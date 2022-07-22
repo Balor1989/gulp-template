@@ -1,6 +1,7 @@
 const { watch, parallel, series } = require("gulp");
 const browserSync = require("browser-sync").create();
 const path = require("./config/path.js");
+const { isProd } = require("./config/app.js");
 
 //Listener
 const watcher = () => {
@@ -26,13 +27,13 @@ const css = require("./src/task/css.js");
 const scss = require("./src/task/scss.js");
 const js = require("./src/task/js.js");
 const img = require("./src/task/img.js");
+
 exports.watch = watcher;
 exports.scss = scss;
 exports.clear = clear;
 
+const build = series(clear, parallel(html, css, js, img));
+const dev = series(build, parallel(watcher, server));
+
 //Bundler
-exports.dev = series(
-  clear,
-  parallel(html, css, js, img),
-  parallel(watcher, server)
-);
+exports.default = isProd ? build : dev;
