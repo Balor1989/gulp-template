@@ -1,17 +1,18 @@
-const { src, dest } = require("gulp");
-const path = require("../../config/path.js");
+import gulp from "gulp";
+import path from "../../config/path.js";
 
 //Plugins
-const size = require("gulp-size");
-const htmlmin = require("gulp-htmlmin");
-const include = require("gulp-file-include");
-const plumber = require("gulp-plumber");
-const notify = require("gulp-notify");
-const { isProd } = require("../../config/app.js");
+import size from "gulp-size";
+import htmlmin from "gulp-htmlmin";
+import include from "gulp-file-include";
+import plumber from "gulp-plumber";
+import notify from "gulp-notify";
+import { isProd } from "../../config/app.js";
 
 //HTML processing
 const html = () => {
-  return src(path.html.src)
+  return gulp
+    .src(path.html.src)
     .pipe(
       plumber({
         errorHandler: notify.onError((error) => ({
@@ -24,7 +25,7 @@ const html = () => {
     .pipe(size({ title: "before minimize" }))
     .pipe(htmlmin({ collapseWhitespace: isProd }))
     .pipe(size({ title: "after minimize" }))
-    .pipe(dest(path.html.dest));
+    .pipe(gulp.dest(path.html.dest));
 };
 
-module.exports = html;
+export default html;

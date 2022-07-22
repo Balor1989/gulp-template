@@ -1,16 +1,17 @@
-const { src, dest } = require("gulp");
-const path = require("../../config/path.js");
+import gulp from "gulp";
+import path from "../../config/path.js";
 
 //Plugins
-const plumber = require("gulp-plumber");
-const notify = require("gulp-notify");
-const babel = require("gulp-babel");
-const webpack = require("webpack-stream");
-const { isProd, isDev } = require("../../config/app.js");
+import plumber from "gulp-plumber";
+import notify from "gulp-notify";
+import babel from "gulp-babel";
+import webpack from "webpack-stream";
+import { isProd, isDev } from "../../config/app.js";
 
 //JavaScript processing
 const js = () => {
-  return src(path.js.src, { sourcemaps: isDev })
+  return gulp
+    .src(path.js.src, { sourcemaps: isDev })
     .pipe(
       plumber({
         errorHandler: notify.onError((error) => ({
@@ -21,7 +22,7 @@ const js = () => {
     )
     .pipe(babel())
     .pipe(webpack({ mode: isProd ? "production" : "development" }))
-    .pipe(dest(path.js.dest, { sourcemaps: isDev }));
+    .pipe(gulp.dest(path.js.dest, { sourcemaps: isDev }));
 };
 
-module.exports = js;
+export default js;

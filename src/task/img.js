@@ -1,17 +1,18 @@
-const { src, dest } = require("gulp");
-const path = require("../../config/path.js");
+import gulp from "gulp";
+import path from "../../config/path.js";
 
 //Plugins
-const plumber = require("gulp-plumber");
-const notify = require("gulp-notify");
-const imagemin = require("gulp-imagemin");
-const newer = require("gulp-newer");
-const gulpif = require("gulp-if");
-const { isProd } = require("../../config/app.js");
+import plumber from "gulp-plumber";
+import notify from "gulp-notify";
+import imagemin from "gulp-imagemin";
+import newer from "gulp-newer";
+import gulpif from "gulp-if";
+import { isProd } from "../../config/app.js";
 
 //Image processing
 const img = () => {
-  return src(path.img.src)
+  return gulp
+    .src(path.img.src)
     .pipe(
       plumber({
         errorHandler: notify.onError((error) => ({
@@ -22,7 +23,7 @@ const img = () => {
     )
     .pipe(newer(path.img.dest))
     .pipe(gulpif(isProd, imagemin({ verbose: true })))
-    .pipe(dest(path.img.dest));
+    .pipe(gulp.dest(path.img.dest));
 };
 
-module.exports = img;
+export default img;

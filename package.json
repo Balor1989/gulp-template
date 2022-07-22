@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "gulp",
-    "build": "gulp --production"
+    "build": "gulp --production",
+    "clear": "gulp clear"
   },
   "browserslist": {
     "production": [
